@@ -78,12 +78,20 @@ class ExerciseActivity : AppCompatActivity() {
                 tvExerciseTimer.text = (exerciseTimerDuration.toInt() - exerciseProgress ).toString()
             }
             override fun onFinish() {
-                Toast.makeText(
-                    this@ExerciseActivity,
-                    "Here now we will start the next rest screen.",
-                    Toast.LENGTH_LONG
-                ).show()
-                currentExercisePosition++
+//                Toast.makeText(
+//                    this@ExerciseActivity,
+//                    "Here now we will start the next rest screen.",
+//                    Toast.LENGTH_LONG
+//                ).show()
+                if(currentExercisePosition < exerciseList?.size!! - 1){ // hardcodeing may cause error
+                    setupRestView()
+                }else{
+                    Toast.makeText(
+                        this@ExerciseActivity,
+                        "Congratulations! You have completed the 7 minutes workout.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }.start()
     }
@@ -97,10 +105,16 @@ class ExerciseActivity : AppCompatActivity() {
             exerciseProgress = 0
         }
         setExerciseProgressBar()
+
+        ivImage.setImageResource(exerciseList!![currentExercisePosition].getImage())
+        tvExerciseName.text = exerciseList!![currentExercisePosition].getName()
     }
 
 
     private fun setupRestView(){
+        llExerciseView.visibility = View.GONE
+        llRestView.visibility = View.VISIBLE
+
         if(restTimer != null){
             restTimer!!.cancel()
             restProgress = 0
