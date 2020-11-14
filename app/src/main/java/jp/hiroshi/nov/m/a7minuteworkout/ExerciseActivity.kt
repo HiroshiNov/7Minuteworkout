@@ -17,6 +17,9 @@ class ExerciseActivity : AppCompatActivity() {
 
     private var exerciseTimerDuration: Long = 30
 
+    private var exerciseList:ArrayList<ExerciseModel>? = null
+    private var currentExercisePosition = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
@@ -32,7 +35,7 @@ class ExerciseActivity : AppCompatActivity() {
         }
         setupRestView()
 
-//        llRestView.visibility = View.VISIBLE
+        exerciseList = Constants.defaultExerciseList() // set Exercise list
     }
 
     override fun onDestroy() {
@@ -59,7 +62,7 @@ class ExerciseActivity : AppCompatActivity() {
 //                    "Here now we will start the exercise.",
 //                    Toast.LENGTH_LONG
 //                ).show()
-
+                currentExercisePosition++
                 setupExerciseView()
             }
         }.start()
@@ -80,6 +83,7 @@ class ExerciseActivity : AppCompatActivity() {
                     "Here now we will start the next rest screen.",
                     Toast.LENGTH_LONG
                 ).show()
+                currentExercisePosition++
             }
         }.start()
     }
