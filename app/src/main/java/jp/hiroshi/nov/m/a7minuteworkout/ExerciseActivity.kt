@@ -99,6 +99,11 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 //                    Toast.LENGTH_LONG
 //                ).show()
                 currentExercisePosition++
+
+                exerciseList!![currentExercisePosition].setIsSelected(true)
+                exerciseAdapter!!.notifyDataSetChanged()
+
+
                 setupExerciseView()
             }
         }.start()
@@ -121,6 +126,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 //                    Toast.LENGTH_LONG
 //                ).show()
                 if (currentExercisePosition < exerciseList?.size!! - 1) { // hardcodeing may cause error
+                    exerciseList!![currentExercisePosition].setIsSelected(false)
+                    exerciseList!![currentExercisePosition].setIsCompleted(true)
+                    exerciseAdapter!!.notifyDataSetChanged()
+
                     setupRestView()
                 } else {
                     Toast.makeText(
