@@ -1,8 +1,10 @@
 package jp.hiroshi.nov.m.a7minuteworkout
 
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.provider.MediaStore
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
@@ -23,7 +25,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var exerciseList: ArrayList<ExerciseModel>? = null
     private var currentExercisePosition = -1
+
     private var tts: TextToSpeech? = null
+
+    private var player: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +65,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if(tts!= null){
             tts!!.stop()
             tts!!.shutdown()
+        }
+
+        if(player!= null){
+            player!!.stop()
         }
 
         super.onDestroy()
@@ -137,6 +146,19 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
 
     private fun setupRestView() {
+        try{
+            //val soundURI = Uri.parse("android:resource://")
+            player = MediaPlayer.create(applicationContext, R.raw.press_start)
+
+            player!!.isLooping = false
+            player!!.start()
+
+        }catch(e:Exception){
+             e.printStackTrace()
+        }
+
+
+
         llExerciseView.visibility = View.GONE
         llRestView.visibility = View.VISIBLE
 
