@@ -37,7 +37,6 @@ class ExerciseStatusAdapter(val items: ArrayList<ExerciseModel>, val context:Con
         return items.size
     }
 
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val tvItem = view.tvItem
     }

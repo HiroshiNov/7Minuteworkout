@@ -1,5 +1,6 @@
 package jp.hiroshi.nov.m.a7minuteworkout
 
+import android.app.Dialog
 import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_exercise.*
+import kotlinx.android.synthetic.main.dialog_custom_back_confirmation.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -44,7 +46,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             actionbar.setDisplayHomeAsUpEnabled(true)
         }
         toolbar_exercise_activity.setNavigationOnClickListener {
-            onBackPressed() //backbutton on the screen
+            customDialogForBackButton()
+            //            onBackPressed() //backbutton on the screen
 
         }
 
@@ -54,6 +57,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         setupRestView()
 
         setupExerciseStatusRecyclerView()
+
+
 
     }
 
@@ -209,5 +214,21 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         rvExerciseStatus.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         exerciseAdapter = ExerciseStatusAdapter(exerciseList!!,this)
         rvExerciseStatus.adapter = exerciseAdapter
+    }
+
+    private fun customDialogForBackButton(){
+        val customDialog = Dialog(this)
+
+        customDialog.setContentView(R.layout.dialog_custom_back_confirmation)
+        customDialog.tvYes.setOnClickListener{
+            finish()
+            customDialog.dismiss()
+        }
+
+        customDialog.setContentView(R.layout.dialog_custom_back_confirmation)
+        customDialog.tvNo.setOnClickListener{
+            finish()
+            customDialog.dismiss()
+        }
     }
 }
