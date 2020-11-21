@@ -224,11 +224,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             finish()
             customDialog.dismiss()
         }
-
-        customDialog.setContentView(R.layout.dialog_custom_back_confirmation)
         customDialog.tvNo.setOnClickListener{
-            finish()
             customDialog.dismiss()
         }
+        customDialog.show()
     }
 }
