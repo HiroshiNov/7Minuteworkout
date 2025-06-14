@@ -17,15 +17,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         llStart.setOnClickListener {
-//            Toast.makeText(this, "Here we wil start the exercize",Toast.LENGTH_LONG).show()
-        val intent = Intent(this, ExerciseActivity::class.java) //::class menase
+// Toast.makeText(this, "Here we will start the exercise", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, ExerciseActivity::class.java) // ::class means a reference to the activity class
             startActivity(intent)
 
         }
 
 
         llBMI.setOnClickListener {
-            val intent = Intent(this, BMIActivity::class.java) //::class menase
+            val intent = Intent(this, BMIActivity::class.java) // ::class means a reference to the activity class
             startActivity(intent)
 
         }
