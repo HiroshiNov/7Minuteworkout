@@ -17,25 +17,38 @@ import kotlinx.android.synthetic.main.dialog_custom_back_confirmation.*
 import java.util.*
 import kotlin.collections.ArrayList
 
+/** Handles workout timer sequence and exercise UI. */
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
+    /** Countdown during rest periods. */
     private var restTimer: CountDownTimer? = null
+    /** Progress counter for the rest timer. */
     private var restProgress = 0
+    /** Duration of each rest period in seconds. */
     private var restTimerDuration: Long = 10
+    /** Countdown during an exercise. */
     private var exerciseTimer: CountDownTimer? = null
+    /** Progress counter for the exercise timer. */
     private var exerciseProgress = 0
 
+    /** Duration of each exercise in seconds. */
     private var exerciseTimerDuration: Long = 30
 
+    /** List of exercises to perform. */
     private var exerciseList: ArrayList<ExerciseModel>? = null
+    /** Index of the currently displayed exercise. */
     private var currentExercisePosition = -1
 
+    /** Text-to-speech engine for exercise names. */
     private var tts: TextToSpeech? = null
 
+    /** Plays audio cues between exercises. */
     private var player: MediaPlayer? = null
 
+    /** Adapter for the recycler showing exercise status. */
     private var exerciseAdapter: ExerciseStatusAdapter? = null
 
+    /** Sets up views and timers when the activity is created. */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
@@ -62,6 +75,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     }
 
+    /** Cleans up timers, TTS, and media on destroy. */
     override fun onDestroy() {
 
         if (restTimer != null) {
@@ -89,6 +103,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     }
 
+    /** Starts and updates the rest countdown bar. */
     private fun setRestProgressBar() {
         progressBar.progress = restProgress
         restTimer = object : CountDownTimer(restTimerDuration * 1000, 1000) {
@@ -116,6 +131,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     }
 
+    /** Starts and updates the exercise countdown bar. */
     private fun setExerciseProgressBar() {
         progressBarExercise.progress = exerciseProgress
         exerciseTimer = object : CountDownTimer(exerciseTimerDuration * 1000, 1000) {
@@ -131,7 +147,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 //                    "Here now we will start the next rest screen.",
 //                    Toast.LENGTH_LONG
 //                ).show()
-                if (currentExercisePosition < exerciseList?.size!! - 1) { // hardcodeing may cause error
+                 if (currentExercisePosition < exerciseList?.size!! - 1) {
+                     // hardcoding may cause error
                     exerciseList!![currentExercisePosition].setIsSelected(false)
                     exerciseList!![currentExercisePosition].setIsCompleted(true)
                     exerciseAdapter!!.notifyDataSetChanged()
@@ -151,6 +168,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }.start()
     }
 
+    /** Displays the exercise view and begins the timer. */
     private fun setupExerciseView() {
         llRestView.visibility = View.GONE
         llExerciseView.visibility = View.VISIBLE
@@ -169,6 +187,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
 
+    /** Shows the rest view between exercises. */
     private fun setupRestView() {
         try{
             //val soundURI = Uri.parse("android:resource://")
@@ -195,10 +214,12 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         setRestProgressBar()
     }
 
+    /** Callback for TextToSpeech initialization. */
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             val result = tts!!.setLanguage(Locale.US)
-            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+            if (result == TextToSpeech.LANG_MISSING_DATA ||
+                result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "The Language specified is not supported!")
             }
         } else {
@@ -206,16 +227,23 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
     }
 
+    /** Speaks the provided text using TextToSpeech. */
     private fun speakOut(text: String) {
         tts!!.speak(text,TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
+    /** Configures the RecyclerView that shows exercise status. */
     private fun setupExerciseStatusRecyclerView(){
-        rvExerciseStatus.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+        rvExerciseStatus.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
         exerciseAdapter = ExerciseStatusAdapter(exerciseList!!,this)
         rvExerciseStatus.adapter = exerciseAdapter
     }
 
+    /** Shows a confirmation dialog when the back button is pressed. */
     private fun customDialogForBackButton(){
         val customDialog = Dialog(this)
 

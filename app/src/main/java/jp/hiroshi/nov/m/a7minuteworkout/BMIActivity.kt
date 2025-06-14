@@ -8,8 +8,10 @@ import kotlinx.android.synthetic.main.activity_b_m_i.*
 import java.math.BigDecimal
 import java.math.RoundingMode
 
+/** Calculates and displays Body Mass Index. */
 class BMIActivity : AppCompatActivity() {
 
+    /** Initializes toolbar and calculate button. */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_b_m_i)
@@ -41,6 +43,7 @@ class BMIActivity : AppCompatActivity() {
 
     }
 
+    /** Shows the BMI result labels for the provided value. */
     private fun displayBMIResult(bmi : Float) {
         val bmiLabel: String
         val bmiDescription: String
@@ -85,6 +88,7 @@ class BMIActivity : AppCompatActivity() {
 
 
 
+    /** Validates user input before calculation. */
     private fun validateMetricUnits():Boolean {
         var isValid = true
 
