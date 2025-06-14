@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_finish.*
 
+/** Final screen displayed after completing the workout. */
 class FinishActivity : AppCompatActivity() {
 
+    /** Sets up toolbar and finish button. */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finish)

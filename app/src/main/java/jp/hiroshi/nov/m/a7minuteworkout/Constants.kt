@@ -1,7 +1,9 @@
 package jp.hiroshi.nov.m.a7minuteworkout
 
+/** Holds static helpers used across the app. */
 class Constants {
-    companion object{ //static function,value etc
+    companion object{ // static function,value etc
+        /** Creates the default set of exercises. */
         fun defaultExerciseList():ArrayList<ExerciseModel>{
             val exerciseList = ArrayList<ExerciseModel>()
 
