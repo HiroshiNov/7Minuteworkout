@@ -26,14 +26,14 @@ class BMIActivity : AppCompatActivity() {
         }
 
         btnCalculateUnits.setOnClickListener {
-            if(validateMetricUnits()){
-                val heightValue : Float = etMetricUnitHeight.text.toString().toFloat() /100
-                val weightValue : Float = etMetricUnitWeight.text.toString().toFloat()
+            if (validateMetricUnits()) {
+                val heightValue: Float = etMetricUnitHeight.text.toString().toFloat() / 100
+                val weightValue: Float = etMetricUnitWeight.text.toString().toFloat()
 
-                val bmi = weightValue / (heightValue*heightValue)
+                val bmi = weightValue / (heightValue * heightValue)
                 displayBMIResult(bmi)
-            }else{
-                Toast.makeText(this,"",Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Please enter valid values", Toast.LENGTH_LONG).show()
             }
 
 
@@ -46,29 +46,29 @@ class BMIActivity : AppCompatActivity() {
         val bmiDescription: String
 
         if (bmi.compareTo(15f) <= 0) {
-            bmiLabel = "Normal"
-            bmiDescription = "Too thin"
+            bmiLabel = "Very severely underweight"
+            bmiDescription = "You need to gain weight"
         } else if (bmi.compareTo(15f) > 0 && bmi.compareTo(16f) <= 0) {
-            bmiLabel = "Normal"
-            bmiDescription = "Too thin"
+            bmiLabel = "Severely underweight"
+            bmiDescription = "You need to gain weight"
         } else if (bmi.compareTo(16f) > 0 && bmi.compareTo(18.5f) <= 0) {
-            bmiLabel = "Normal"
-            bmiDescription = "Too thin"
+            bmiLabel = "Underweight"
+            bmiDescription = "You need to gain weight"
         } else if (bmi.compareTo(18.5f) > 0 && bmi.compareTo(25f) <= 0) {
             bmiLabel = "Normal"
-            bmiDescription = "You're nomal"
+            bmiDescription = "You are in good shape"
         } else if (bmi.compareTo(25f) > 0 && bmi.compareTo(30f) <= 0) {
-            bmiLabel = "Danger"
-            bmiDescription = "Too fat"
+            bmiLabel = "Overweight"
+            bmiDescription = "Try to exercise more"
         } else if (bmi.compareTo(30f) > 0 && bmi.compareTo(35f) <= 0) {
-            bmiLabel = "Danger"
-            bmiDescription = "Too fat"
+            bmiLabel = "Obese Class I"
+            bmiDescription = "Medical advice recommended"
         } else if (bmi.compareTo(35f) > 0 && bmi.compareTo(40f) <= 0) {
-            bmiLabel = "Danger"
-            bmiDescription = "Too fat"
+            bmiLabel = "Obese Class II"
+            bmiDescription = "Seek medical advice"
         } else {
-            bmiLabel = "Unknown"
-            bmiDescription = "Unknown"
+            bmiLabel = "Obese Class III"
+            bmiDescription = "Seek medical advice urgently"
         }
 
         tvYourBMI.visibility = View.VISIBLE
