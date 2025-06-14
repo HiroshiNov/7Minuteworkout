@@ -38,3 +38,6 @@ Androidアプリ「7 Minute Workout」のサンプルプロジェクトです。
 単体テストは `app/src/test/java` に配置されています。
 最近追加された `ConstantsTest.kt` では、 `Constants.defaultExerciseList()` が
 12 個のエクササイズを返すこと、また最初の要素が "JumpingJacks" であることを確認しています。
+
+## Further Documentation
+- [Class Overview](docs/CLASS_OVERVIEW.md)
