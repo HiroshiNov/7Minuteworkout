@@ -33,3 +33,8 @@ Androidアプリ「7 Minute Workout」のサンプルプロジェクトです。
 |— build.gradle     プロジェクト全体の設定
 |— settings.gradle  モジュール管理
 ```
+
+## テスト
+単体テストは `app/src/test/java` に配置されています。
+最近追加された `ConstantsTest.kt` では、 `Constants.defaultExerciseList()` が
+12 個のエクササイズを返すこと、また最初の要素が "JumpingJacks" であることを確認しています。
